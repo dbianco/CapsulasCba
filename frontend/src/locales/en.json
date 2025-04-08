@@ -1,0 +1,61 @@
+{
+  "common": {
+    "appName": "CapsulasCba",
+    "language": {
+      "en": "English",
+      "es": "Spanish",
+      "toggle": "Toggle language"
+    }
+  },
+  "sidebar": {
+    "menu": {
+      "home": "Home",
+      "explore": "Explore",
+      "groups": "Groups",
+      "saved": "Saved",
+      "trending": "Trending"
+    },
+    "bottomMenu": {
+      "settings": "Settings",
+      "help": "Help"
+    },
+    "tooltip": {
+      "expand": "Expand",
+      "collapse": "Collapse"
+    }
+  },
+  "pages": {
+    "login": "Login",
+    "register": "Register",
+    "forgotPassword": "Forgot Password",
+    "resetPassword": "Reset Password",
+    "profile": "Profile",
+    "content": "Content",
+    "contentEditor": "Content Editor",
+    "search": "Search",
+    "notFound": "Page Not Found"
+  },
+  "header": {
+    "search": "Search...",
+    "createContent": "Create Content",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "myProfile": "My Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "footer": {
+    "description": "Collaborative microlearning platform for students.",
+    "links": "Links",
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms of Use",
+    "community": "Community",
+    "guidelines": "Community Guidelines",
+    "faq": "FAQ",
+    "feedback": "Send Feedback",
+    "copyright": "© {{year}} CapsulasCba. All rights reserved."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "common": {
+    "appName": "CapsulasCba",
+    "language": {
+      "en": "Inglés",
+      "es": "Español",
+      "toggle": "Cambiar idioma"
+    }
+  },
+  "sidebar": {
+    "menu": {
+      "home": "Inicio",
+      "explore": "Explorar",
+      "groups": "Grupos",
+      "saved": "Guardados",
+      "trending": "Tendencias"
+    },
+    "bottomMenu": {
+      "settings": "Configuración",
+      "help": "Ayuda"
+    },
+    "tooltip": {
+      "expand": "Expandir",
+      "collapse": "Contraer"
+    }
+  },
+  "pages": {
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "forgotPassword": "Recuperar Contraseña",
+    "resetPassword": "Restablecer Contraseña",
+    "profile": "Perfil",
+    "content": "Contenido",
+    "contentEditor": "Editor de Contenido",
+    "search": "Búsqueda",
+    "notFound": "Página No Encontrada"
+  },
+  "header": {
+    "search": "Buscar...",
+    "createContent": "Crear contenido",
+    "notifications": "Notificaciones",
+    "profile": "Perfil",
+    "myProfile": "Mi Perfil",
+    "logout": "Cerrar Sesión",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse"
+  },
+  "footer": {
+    "description": "Plataforma de microaprendizaje colaborativo para estudiantes.",
+    "links": "Enlaces",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos de uso",
+    "community": "Comunidad",
+    "guidelines": "Pautas de la comunidad",
+    "faq": "Preguntas frecuentes",
+    "feedback": "Enviar comentarios",
+    "copyright": "© {{year}} CapsulasCba. Todos los derechos reservados."
+  }
+}
