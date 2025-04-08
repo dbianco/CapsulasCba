@@ -4,32 +4,6 @@
 
 CapsulasCba es una plataforma de microaprendizaje colaborativo que permite a estudiantes crear y compartir pequeñas lecciones o "cápsulas" de conocimiento sobre diversos temas. La plataforma conecta estudiantes con recursos educativos personalizados y fomenta la creación y compartición de conocimiento entre pares, aprovechando la inteligencia colectiva de la comunidad estudiantil.
 
-## Arquitectura de Internacionalización
-
-```mermaid
-graph TD
-    subgraph "Frontend"
-        I18N[i18n.js]
-        EN[en.json]
-        ES[es.json]
-        COMP[Componentes React]
-        HEADER[Header.jsx]
-        SIDEBAR[Sidebar.jsx]
-        
-        I18N --> |Carga| EN
-        I18N --> |Carga| ES
-        I18N --> |Provee traducciones| COMP
-        HEADER --> |Toggle idioma| I18N
-        COMP --> |useTranslation| I18N
-        SIDEBAR --> |useTranslation| I18N
-    end
-
-    style I18N fill:#f9f,stroke:#333,stroke-width:2px
-    style EN fill:#bbf,stroke:#333
-    style ES fill:#bbf,stroke:#333
-    style HEADER fill:#bfb,stroke:#333
-    style SIDEBAR fill:#bfb,stroke:#333
-```
 
 ## Arquitectura de Alto Nivel
 
