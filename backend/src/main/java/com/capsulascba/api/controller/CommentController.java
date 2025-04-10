@@ -1,15 +1,13 @@
 package com.capsulascba.api.controller;
 
-import com.capsulascba.api.model.Comment;
+import com.capsulascba.api.dto.CommentDTO;
 import com.capsulascba.api.service.CommentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -21,17 +19,21 @@ public class CommentController {
     }
 
     @PostMapping
-    public Comment createComment(@RequestBody Comment comment) {
-        return commentService.saveComment(comment);
+    public ResponseEntity<CommentDTO> createComment(@Valid @RequestBody CommentDTO commentDTO) {
+        CommentDTO savedComment = commentService.saveComment(commentDTO);
+        return new ResponseEntity<>(savedComment, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Comment> getAllComments() {
-        return commentService.getAllComments();
+    public ResponseEntity<List<CommentDTO>> getAllComments() {
+        List<CommentDTO> comments = commentService.getAllComments();
+        return ResponseEntity.ok(comments);
     }
 
     @GetMapping("/{id}")
-    public Optional<Comment> getCommentById(Long id) {
-        return commentService.getCommentById(id);
+    public ResponseEntity<CommentDTO> getCommentById(@PathVariable Long id) {
+        return commentService.getCommentById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
