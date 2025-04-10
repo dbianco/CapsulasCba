@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * Entity class representing a comment on content.
+ * 
+ * @author dbianco
  */
 @Entity
 @Table(name = "comments")

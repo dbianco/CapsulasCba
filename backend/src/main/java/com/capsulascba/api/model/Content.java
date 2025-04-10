@@ -16,6 +16,8 @@ import java.util.Set;
 
 /**
  * Entity class representing a content capsule in the system.
+ * 
+ * @author dbianco
  */
 @Entity
 @Table(name = "contents")
@@ -101,6 +103,8 @@ public class Content {
 
     /**
      * Enum representing the type of content.
+     * 
+     * @author dbianco
      */
     public enum ContentType {
         CONCEPT_MAP,
@@ -118,6 +122,8 @@ public class Content {
 
     /**
      * Enum representing the education level.
+     * 
+     * @author dbianco
      */
     public enum EducationLevel {
         PRIMARY,

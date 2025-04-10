@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 
 /**
  * Entity class representing a resource attached to content.
+ * 
+ * @author dbianco
  */
 @Entity
 @Table(name = "content_resources")

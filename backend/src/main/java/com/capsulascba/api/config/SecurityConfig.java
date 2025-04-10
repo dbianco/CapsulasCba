@@ -19,6 +19,8 @@ import java.util.List;
 /**
  * Security configuration for the application.
  * Configures CORS, CSRF, session management, and request authorization.
+ * 
+ * @author dbianco
  */
 @Configuration
 @EnableWebSecurity

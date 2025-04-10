@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 
 /**
  * Entity class representing a version of content.
+ * 
+ * @author dbianco
  */
 @Entity
 @Table(name = "content_versions")

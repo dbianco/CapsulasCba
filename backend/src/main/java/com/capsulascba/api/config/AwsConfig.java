@@ -1,21 +1,21 @@
 package com.capsulascba.api.config;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.sqs.AmazonSQS;
-import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.sqs.SqsClient;
 
 /**
  * AWS configuration for the application.
  * Configures AWS services like SQS and S3.
+ * 
+ * @author dbianco
  */
 @Configuration
 public class AwsConfig {
@@ -27,13 +27,13 @@ public class AwsConfig {
      * Configures the AWS SQS client.
      * Uses the default credentials provider chain for authentication.
      * 
-     * @return the configured AmazonSQS client
+     * @return the configured SqsClient
      */
     @Bean
-    public AmazonSQS amazonSQS() {
-        return AmazonSQSClientBuilder.standard()
-                .withRegion(Regions.fromName(region))
-                .withCredentials(new DefaultAWSCredentialsProviderChain())
+    public SqsClient sqsClient() {
+        return SqsClient.builder()
+                .region(Region.of(region))
+                .credentialsProvider(DefaultCredentialsProvider.create())
                 .build();
     }
 
@@ -41,13 +41,13 @@ public class AwsConfig {
      * Configures the AWS S3 client.
      * Uses the default credentials provider chain for authentication.
      * 
-     * @return the configured AmazonS3 client
+     * @return the configured S3Client
      */
     @Bean
-    public AmazonS3 amazonS3() {
-        return AmazonS3ClientBuilder.standard()
-                .withRegion(Regions.fromName(region))
-                .withCredentials(new DefaultAWSCredentialsProviderChain())
+    public S3Client s3Client() {
+        return S3Client.builder()
+                .region(Region.of(region))
+                .credentialsProvider(DefaultCredentialsProvider.create())
                 .build();
     }
 
@@ -55,17 +55,17 @@ public class AwsConfig {
      * Configures the AWS SQS client for local development.
      * Uses local credentials for authentication.
      * 
-     * @return the configured AmazonSQS client
+     * @return the configured SqsClient
      */
     @Bean
     @Profile("local")
-    public AmazonSQS amazonSQSLocal(
+    public SqsClient sqsClientLocal(
             @Value("${aws.credentials.access-key}") String accessKey,
             @Value("${aws.credentials.secret-key}") String secretKey) {
-        BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
-        return AmazonSQSClientBuilder.standard()
-                .withRegion(Regions.fromName(region))
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+        AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);
+        return SqsClient.builder()
+                .region(Region.of(region))
+                .credentialsProvider(StaticCredentialsProvider.create(credentials))
                 .build();
     }
 
@@ -73,17 +73,17 @@ public class AwsConfig {
      * Configures the AWS S3 client for local development.
      * Uses local credentials for authentication.
      * 
-     * @return the configured AmazonS3 client
+     * @return the configured S3Client
      */
     @Bean
     @Profile("local")
-    public AmazonS3 amazonS3Local(
+    public S3Client s3ClientLocal(
             @Value("${aws.credentials.access-key}") String accessKey,
             @Value("${aws.credentials.secret-key}") String secretKey) {
-        BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
-        return AmazonS3ClientBuilder.standard()
-                .withRegion(Regions.fromName(region))
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+        AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);
+        return S3Client.builder()
+                .region(Region.of(region))
+                .credentialsProvider(StaticCredentialsProvider.create(credentials))
                 .build();
     }
 }
