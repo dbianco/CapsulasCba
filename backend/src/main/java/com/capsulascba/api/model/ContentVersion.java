@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Entity class representing a version of content.
@@ -49,4 +51,36 @@ public class ContentVersion {
 
     @Column(name = "is_current")
     private boolean current;
+
+    @OneToMany(mappedBy = "version", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CapsuleAssignment> assignments = new ArrayList<>();
+
+    @Column(name = "assignment_count")
+    private Long assignmentCount = 0L;
+
+    /**
+     * Helper method to check if this version can be safely deleted
+     * @return true if the version has no assignments and is not current
+     */
+    public boolean canBeDeleted() {
+        return !current && (assignments == null || assignments.isEmpty());
+    }
+
+    /**
+     * Helper method to check if this version can be assigned
+     * @return true if the version's content is published and approved
+     */
+    public boolean canBeAssigned() {
+        return content.isPublished() && content.isApproved();
+    }
+
+    /**
+     * Helper method to get active assignments for this version
+     * @return List of active assignments
+     */
+    public List<CapsuleAssignment> getActiveAssignments() {
+        return assignments.stream()
+                .filter(CapsuleAssignment::isActive)
+                .collect(java.util.stream.Collectors.toList());
+    }
 }

@@ -89,3 +89,4 @@ aws.properties
 *.njsproj
 *.sln
 *.sw?
+.aider*

@@ -30,12 +30,12 @@ public class Comment {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "content_id", nullable = false)
-    private Content content;
+    @JoinColumn(name = "collaboration_space_id", nullable = false)
+    private CollaborationSpace space;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "author_id", nullable = false)
+    private User author;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String text;

@@ -15,11 +15,11 @@ import java.util.List;
 public class CommentDTO {
     private Long id;
     
-    @NotNull(message = "Content ID is required")
-    private Long contentId;
+    @NotNull(message = "Collaboration Space ID is required")
+    private Long spaceId;
     
-    @NotNull(message = "User ID is required")
-    private Long userId;
+    @NotNull(message = "Author ID is required")
+    private Long authorId;
     
     @NotNull(message = "Comment text is required")
     private String text;

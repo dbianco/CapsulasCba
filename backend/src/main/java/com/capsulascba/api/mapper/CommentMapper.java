@@ -2,7 +2,7 @@ package com.capsulascba.api.mapper;
 
 import com.capsulascba.api.dto.CommentDTO;
 import com.capsulascba.api.model.Comment;
-import com.capsulascba.api.model.Content;
+import com.capsulascba.api.model.CollaborationSpace;
 import com.capsulascba.api.model.User;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +19,8 @@ public class CommentMapper {
 
         return CommentDTO.builder()
                 .id(comment.getId())
-                .contentId(comment.getContent().getId())
-                .userId(comment.getUser().getId())
+                .spaceId(comment.getSpace().getId())
+                .authorId(comment.getAuthor().getId())
                 .text(comment.getText())
                 .parentId(comment.getParent() != null ? comment.getParent().getId() : null)
                 .replies(comment.getReplies() != null ? 
@@ -35,15 +35,15 @@ public class CommentMapper {
                 .build();
     }
 
-    public Comment toEntity(CommentDTO dto, Content content, User user, Comment parent) {
+    public Comment toEntity(CommentDTO dto, CollaborationSpace space, User author, Comment parent) {
         if (dto == null) {
             return null;
         }
 
         return Comment.builder()
                 .id(dto.getId())
-                .content(content)
-                .user(user)
+                .space(space)
+                .author(author)
                 .text(dto.getText())
                 .parent(parent)
                 .likeCount(dto.getLikeCount() != null ? dto.getLikeCount() : 0L)

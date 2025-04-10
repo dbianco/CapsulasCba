@@ -1,5 +1,7 @@
 package com.capsulascba.api.model;
 
+import com.capsulascba.api.model.enums.ContentType;
+import com.capsulascba.api.model.enums.EducationLevel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -84,14 +86,17 @@ public class Content {
     @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ContentVersion> versions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "capsule", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CapsuleAssignment> assignments = new ArrayList<>();
 
     @Column(name = "view_count")
     private Long viewCount = 0L;
 
     @Column(name = "like_count")
     private Long likeCount = 0L;
+
+    @Column(name = "assignment_count")
+    private Long assignmentCount = 0L;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
@@ -100,37 +105,4 @@ public class Content {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    /**
-     * Enum representing the type of content.
-     * 
-     * @author dbianco
-     */
-    public enum ContentType {
-        CONCEPT_MAP,
-        TIMELINE,
-        GLOSSARY,
-        MATH_PROBLEM,
-        SCIENTIFIC_EXPERIMENT,
-        BOOK_ANALYSIS,
-        ART_PROJECT,
-        DEBATE,
-        TUTORIAL,
-        RESOURCE_COLLECTION,
-        OTHER
-    }
-
-    /**
-     * Enum representing the education level.
-     * 
-     * @author dbianco
-     */
-    public enum EducationLevel {
-        PRIMARY,
-        SECONDARY,
-        TERTIARY,
-        UNIVERSITY,
-        PROFESSIONAL,
-        ALL
-    }
 }

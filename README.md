@@ -4,6 +4,14 @@
 
 CapsulasCba es una plataforma de microaprendizaje colaborativo que permite a estudiantes crear y compartir pequeñas lecciones o "cápsulas" de conocimiento sobre diversos temas. La plataforma conecta estudiantes con recursos educativos personalizados y fomenta la creación y compartición de conocimiento entre pares, aprovechando la inteligencia colectiva de la comunidad estudiantil.
 
+Características principales:
+- Creación y gestión de cápsulas de conocimiento
+- Sistema de versionado de contenido
+- Grupos de trabajo colaborativos
+- Asignación de cápsulas a grupos por períodos específicos
+- Espacios de colaboración para cada asignación de cápsula
+- Sistema de comentarios y discusiones dentro de los espacios de colaboración
+
 
 ## Arquitectura de Alto Nivel
 
@@ -65,6 +73,105 @@ graph TD
     Moderation_Service --> ContentDB
     Gamification_Service --> UserDB
     Gamification_Service --> AnalyticsDB
+```
+
+## Modelo de Datos
+
+El siguiente diagrama muestra el modelo de datos detallado para el sistema de cápsulas y grupos de trabajo:
+
+```mermaid
+classDiagram
+    class Content {
+        +Long id
+        +String title
+        +String description
+        +ContentType contentType
+        +User author
+        +boolean published
+        +boolean approved
+        +Set~String~ tags
+        +Set~String~ categories
+        +EducationLevel educationLevel
+        +LocalDateTime createdAt
+        +LocalDateTime updatedAt
+    }
+
+    class ContentVersion {
+        +Long id
+        +Integer versionNumber
+        +String content_data
+        +String changeDescription
+        +User createdBy
+        +boolean current
+        +LocalDateTime createdAt
+    }
+
+    class WorkGroup {
+        +Long id
+        +String name
+        +String description
+        +WorkGroupStatus status
+        +LocalDateTime createdAt
+        +LocalDateTime updatedAt
+    }
+
+    class WorkGroupMember {
+        +Long id
+        +WorkGroup workGroup
+        +User user
+        +WorkGroupRole role
+        +LocalDateTime joinedAt
+        +boolean active
+    }
+
+    class CapsuleAssignment {
+        +Long id
+        +WorkGroup workGroup
+        +Content capsule
+        +ContentVersion version
+        +LocalDateTime startDate
+        +LocalDateTime endDate
+        +AssignmentStatus status
+        +boolean collaborationEnabled
+        +LocalDateTime createdAt
+    }
+
+    class CollaborationSpace {
+        +Long id
+        +CapsuleAssignment assignment
+        +boolean active
+        +LocalDateTime createdAt
+        +LocalDateTime updatedAt
+    }
+
+    class Comment {
+        +Long id
+        +String text
+        +User author
+        +CollaborationSpace space
+        +Long likeCount
+        +boolean edited
+        +Comment parent
+        +List~Comment~ replies
+        +LocalDateTime createdAt
+        +LocalDateTime updatedAt
+    }
+
+    class User {
+        +Long id
+        +String name
+        +String email
+    }
+
+    Content "1" -- "*" ContentVersion
+    Content "1" -- "*" CapsuleAssignment
+    ContentVersion "1" -- "*" CapsuleAssignment
+    WorkGroup "1" -- "*" WorkGroupMember
+    User "1" -- "*" WorkGroupMember
+    WorkGroup "1" -- "*" CapsuleAssignment
+    CapsuleAssignment "1" -- "1" CollaborationSpace
+    CollaborationSpace "1" -- "*" Comment
+    User "1" -- "*" Comment
 ```
 
 ## Stack Tecnológico
@@ -202,12 +309,22 @@ capsulascba/
 │   │   │   │   ├── dto/                   # Objetos de transferencia de datos
 │   │   │   │   ├── exception/             # Manejo de excepciones
 │   │   │   │   ├── model/
-│   │   │   │   │   ├── Comment.java       # Modelo de comentarios
-│   │   │   │   │   ├── Content.java       # Modelo de contenido
+│   │   │   │   │   ├── Comment.java           # Modelo de comentarios
+│   │   │   │   │   ├── Content.java           # Modelo de contenido
 │   │   │   │   │   ├── ContentResource.java
 │   │   │   │   │   ├── ContentVersion.java
-│   │   │   │   │   └── User.java         # Modelo de usuario
-│   │   │   │   ├── repository/           # Repositorios JPA
+│   │   │   │   │   ├── User.java              # Modelo de usuario
+│   │   │   │   │   ├── WorkGroup.java         # Modelo de grupo de trabajo
+│   │   │   │   │   ├── WorkGroupMember.java   # Modelo de miembro de grupo
+│   │   │   │   │   ├── CapsuleAssignment.java # Modelo de asignación de cápsula
+│   │   │   │   │   └── CollaborationSpace.java # Modelo de espacio de colaboración
+│   │   │   │   ├── repository/               # Repositorios JPA
+│   │   │   │   │   ├── CommentRepository.java
+│   │   │   │   │   ├── ContentRepository.java
+│   │   │   │   │   ├── UserRepository.java
+│   │   │   │   │   ├── WorkGroupRepository.java
+│   │   │   │   │   ├── CapsuleAssignmentRepository.java
+│   │   │   │   │   └── CollaborationSpaceRepository.java
 │   │   │   │   ├── security/             # Configuración de seguridad
 │   │   │   │   ├── service/              # Servicios de negocio
 │   │   │   │   ├── util/                 # Utilidades
