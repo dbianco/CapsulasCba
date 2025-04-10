@@ -43,7 +43,7 @@ public class WorkGroupService {
     }
 
     @Transactional(readOnly = true)
-    public WorkGroupDTO getWorkGroup(Long id) {
+    public WorkGroupDTO getWorkGroupById(Long id) {
         WorkGroup workGroup = workGroupRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Work group not found"));
         return mapToDTO(workGroup);

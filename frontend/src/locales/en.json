@@ -57,5 +57,40 @@
     "faq": "FAQ",
     "feedback": "Send Feedback",
     "copyright": "© {{year}} CapsulasCba. All rights reserved."
+  },
+  "home": {
+    "welcome": "Welcome to CapsulasCba",
+    "description": "Collaborative microlearning platform for students",
+    "exploreContent": "Explore Content",
+    "createContent": "Create Content",
+    "learn": "Learn",
+    "learnDescription": "Access educational content created by students for students.",
+    "collaborate": "Collaborate",
+    "collaborateDescription": "Work with other students in study groups and collaborative projects.",
+    "share": "Share",
+    "shareDescription": "Create and share your own educational content with the community.",
+    "readyToStart": "Ready to start?",
+    "registerNow": "Register Now"
+  },
+  "login": {
+    "usernameHelperText": "Please enter your username",
+    "passwordHelperText": "Please enter your password",
+    "loginButton": "Login"
+  },
+  "register": {
+    "usernameHelperText": "Please enter your username",
+    "emailHelperText": "Please enter your email",
+    "passwordHelperText": "Please enter your password"
+  },
+  "forgotPassword": {
+    "emailHelperText": "Please enter your email address",
+    "submit": "Submit"
+  },
+  "resetPassword": {
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "passwordHelperText": "Please enter your new password",
+    "confirmPasswordHelperText": "Please confirm your new password",
+    "submit": "Reset Password"
   }
 }

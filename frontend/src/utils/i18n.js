@@ -17,8 +17,8 @@ i18n
         translation: esTranslations,
       },
     },
-    lng: 'es', // Set Spanish as default
-    fallbackLng: 'es',
+    lng: 'en',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },

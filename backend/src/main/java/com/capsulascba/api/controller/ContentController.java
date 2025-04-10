@@ -2,12 +2,12 @@ package com.capsulascba.api.controller;
 
 import com.capsulascba.api.model.Content;
 import com.capsulascba.api.service.ContentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +20,12 @@ public class ContentController {
         this.contentService = contentService;
     }
 
-    @PostMapping
-    public Content createContent(@RequestBody Content content) {
-        return contentService.saveContent(content);
+    @PostMapping(consumes = {"multipart/form-data"})
+    public ResponseEntity<Content> createContent(
+            @RequestPart("content") Content content,
+            @RequestPart("file") MultipartFile file) throws IOException {
+        Content createdContent = contentService.saveContent(content, file);
+        return new ResponseEntity<>(createdContent, HttpStatus.CREATED);
     }
 
     @GetMapping

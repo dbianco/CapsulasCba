@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import i18n from './utils/i18n';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Box, CssBaseline } from '@mui/material';
@@ -25,6 +26,13 @@ import CustomSnackbar from './components/common/CustomSnackbar';
 
 const App = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      i18n.changeLanguage(storedLanguage);
+    }
+  }, []);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

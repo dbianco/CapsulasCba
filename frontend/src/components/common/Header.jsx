@@ -171,7 +171,11 @@ const Header = () => {
             <IconButton
               size="large"
               color="inherit"
-              onClick={() => i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es')}
+              onClick={() => {
+                const newLanguage = i18n.language === 'es' ? 'en' : 'es';
+                i18n.changeLanguage(newLanguage);
+                localStorage.setItem('language', newLanguage);
+              }}
               sx={{ mr: 1 }}
             >
               <Language />

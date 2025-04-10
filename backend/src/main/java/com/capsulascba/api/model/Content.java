@@ -18,7 +18,7 @@ import java.util.Set;
 
 /**
  * Entity class representing a content capsule in the system.
- * 
+ *
  * @author dbianco
  */
 @Entity
@@ -105,4 +105,7 @@ public class Content {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Column(name = "resource_url")
+    private String resourceUrl;
 }

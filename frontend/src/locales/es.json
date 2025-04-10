@@ -57,5 +57,40 @@
     "faq": "Preguntas frecuentes",
     "feedback": "Enviar comentarios",
     "copyright": "© {{year}} CapsulasCba. Todos los derechos reservados."
+  },
+  "home": {
+    "welcome": "Bienvenido a CapsulasCba",
+    "description": "Plataforma de microaprendizaje colaborativo para estudiantes",
+    "exploreContent": "Explorar Contenido",
+    "createContent": "Crear Contenido",
+    "learn": "Aprende",
+    "learnDescription": "Accede a contenido educativo creado por estudiantes para estudiantes.",
+    "collaborate": "Colabora",
+    "collaborateDescription": "Trabaja con otros estudiantes en grupos de estudio y proyectos colaborativos.",
+    "share": "Comparte",
+    "shareDescription": "Crea y comparte tu propio contenido educativo con la comunidad.",
+    "readyToStart": "¿Listo para empezar?",
+    "registerNow": "Regístrate Ahora"
+  },
+  "login": {
+    "usernameHelperText": "Por favor, ingrese su nombre de usuario",
+    "passwordHelperText": "Por favor, ingrese su contraseña",
+    "loginButton": "Iniciar Sesión"
+  },
+  "register": {
+    "usernameHelperText": "Por favor, ingrese su nombre de usuario",
+    "emailHelperText": "Por favor, ingrese su correo electrónico",
+    "passwordHelperText": "Por favor, ingrese su contraseña"
+  },
+  "forgotPassword": {
+    "emailHelperText": "Por favor, ingrese su correo electrónico",
+    "submit": "Enviar"
+  },
+  "resetPassword": {
+    "newPassword": "Nueva Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "passwordHelperText": "Por favor, ingrese su nueva contraseña",
+    "confirmPasswordHelperText": "Por favor, confirme su nueva contraseña",
+    "submit": "Restablecer Contraseña"
   }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Entity class representing a version of content.
- * 
+ *
  * @author dbianco
  */
 @Entity
@@ -83,4 +83,7 @@ public class ContentVersion {
                 .filter(CapsuleAssignment::isActive)
                 .collect(java.util.stream.Collectors.toList());
     }
+
+    @Column(name = "resource_url")
+    private String resourceUrl;
 }
