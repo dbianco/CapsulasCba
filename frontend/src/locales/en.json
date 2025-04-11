@@ -73,6 +73,8 @@
     "registerNow": "Register Now"
   },
   "login": {
+    "username": "Username",
+    "password": "Password",
     "usernameHelperText": "Please enter your username",
     "passwordHelperText": "Please enter your password",
     "loginButton": "Login"

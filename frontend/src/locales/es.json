@@ -73,6 +73,8 @@
     "registerNow": "Regístrate Ahora"
   },
   "login": {
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
     "usernameHelperText": "Por favor, ingrese su nombre de usuario",
     "passwordHelperText": "Por favor, ingrese su contraseña",
     "loginButton": "Iniciar Sesión"

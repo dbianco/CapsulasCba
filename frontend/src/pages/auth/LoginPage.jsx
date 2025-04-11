@@ -27,23 +27,23 @@ const LoginPage = () => {
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, p: 4 }}>
       <TextField
         id="username"
-        label={t('username')}
+        label={t('login.username')}
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         sx={{ display: 'block', mb: 2 }}
         aria-describedby="username-helper-text"
       />
-      <FormHelperText id="username-helper-text">{t('usernameHelperText')}</FormHelperText>
+      <FormHelperText id="username-helper-text">{t('login.usernameHelperText')}</FormHelperText>
       <TextField
         id="password"
-        label={t('password')}
+        label={t('login.password')}
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         sx={{ display: 'block', mb: 2 }}
         aria-describedby="password-helper-text"
       />
-      <FormHelperText id="password-helper-text">{t('passwordHelperText')}</FormHelperText>
+      <FormHelperText id="password-helper-text">{t('login.passwordHelperText')}</FormHelperText>
       <Button variant="contained" onClick={handleLogin} sx={{ mt: 2 }} aria-label={t('login.loginButton')}>
         {t('login.loginButton')}
       </Button>
