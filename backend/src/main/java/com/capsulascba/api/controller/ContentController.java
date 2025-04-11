@@ -1,9 +1,11 @@
 package com.capsulascba.api.controller;
 
 import com.capsulascba.api.model.Content;
+import com.capsulascba.api.model.User;
 import com.capsulascba.api.service.ContentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,8 +25,9 @@ public class ContentController {
     @PostMapping(consumes = {"multipart/form-data"})
     public ResponseEntity<Content> createContent(
             @RequestPart("content") Content content,
-            @RequestPart("file") MultipartFile file) throws IOException {
-        Content createdContent = contentService.saveContent(content, file);
+            @RequestPart("file") MultipartFile file,
+            @AuthenticationPrincipal User author) throws IOException {
+        Content createdContent = contentService.saveContent(content, file, author);
         return new ResponseEntity<>(createdContent, HttpStatus.CREATED);
     }
 

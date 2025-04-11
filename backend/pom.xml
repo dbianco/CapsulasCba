@@ -118,13 +118,13 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.capsulascba.api.CapsulasCbaApplication</mainClass>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.capsulascba.api.CapsulasCbaApplication</mainClass>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 </project>

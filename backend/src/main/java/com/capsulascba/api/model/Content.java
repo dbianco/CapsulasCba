@@ -50,22 +50,6 @@ public class Content {
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
-    @Column(name = "version")
-    private Integer version = 1;
-
-    @Column(name = "is_published")
-    private boolean published = false;
-
-    @Column(name = "is_approved")
-    private boolean approved = false;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "approved_by")
-    private User approvedBy;
-
-    @Column(name = "approved_at")
-    private LocalDateTime approvedAt;
-
     @ElementCollection
     @CollectionTable(name = "content_tags", joinColumns = @JoinColumn(name = "content_id"))
     @Column(name = "tag")

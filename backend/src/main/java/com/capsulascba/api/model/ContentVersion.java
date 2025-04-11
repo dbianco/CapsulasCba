@@ -36,7 +36,20 @@ public class ContentVersion {
     private Integer versionNumber;
 
     @Column(columnDefinition = "TEXT")
-    private String content_data;
+    private String contentData;
+
+    @Column(name = "is_published")
+    private boolean published = false;
+
+    @Column(name = "is_approved")
+    private boolean approved = false;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "approved_by")
+    private User approvedBy;
+
+    @Column(name = "approved_at")
+    private LocalDateTime approvedAt;
 
     @Column(columnDefinition = "TEXT")
     private String changeDescription;
@@ -58,6 +71,9 @@ public class ContentVersion {
     @Column(name = "assignment_count")
     private Long assignmentCount = 0L;
 
+    @Column(name = "resource_url")
+    private String resourceUrl;
+
     /**
      * Helper method to check if this version can be safely deleted
      * @return true if the version has no assignments and is not current
@@ -68,14 +84,14 @@ public class ContentVersion {
 
     /**
      * Helper method to check if this version can be assigned
-     * @return true if the version's content is published and approved
+     * @return true if the version is published and approved
      */
     public boolean canBeAssigned() {
-        return content.isPublished() && content.isApproved();
+        return published && approved;
     }
 
     /**
-     * Helper method to get active assignments for this version
+     * Helper method to get active assignments
      * @return List of active assignments
      */
     public List<CapsuleAssignment> getActiveAssignments() {
@@ -83,7 +99,4 @@ public class ContentVersion {
                 .filter(CapsuleAssignment::isActive)
                 .collect(java.util.stream.Collectors.toList());
     }
-
-    @Column(name = "resource_url")
-    private String resourceUrl;
 }

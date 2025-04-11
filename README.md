@@ -6,12 +6,11 @@ CapsulasCba es una plataforma de microaprendizaje colaborativo que permite a est
 
 Características principales:
 - Creación y gestión de cápsulas de conocimiento
-- Sistema de versionado de contenido
+- Sistema de versionado de contenido con aprobación y publicación
 - Grupos de trabajo colaborativos
 - Asignación de cápsulas a grupos por períodos específicos
 - Espacios de colaboración para cada asignación de cápsula
 - Sistema de comentarios y discusiones dentro de los espacios de colaboración
-
 
 ## Arquitectura de Alto Nivel
 
@@ -87,8 +86,6 @@ classDiagram
         +String description
         +ContentType contentType
         +User author
-        +boolean published
-        +boolean approved
         +Set~String~ tags
         +Set~String~ categories
         +EducationLevel educationLevel
@@ -99,12 +96,20 @@ classDiagram
     class ContentVersion {
         +Long id
         +Integer versionNumber
-        +String content_data
+        +String contentData
+        +boolean published
+        +boolean approved
+        +User approvedBy
+        +LocalDateTime approvedAt
         +String changeDescription
         +User createdBy
         +boolean current
         +LocalDateTime createdAt
     }
+
+    Content "1" -- "*" ContentVersion
+    Content "1" -- "*" CapsuleAssignment
+    ContentVersion "1" -- "*" CapsuleAssignment
 
     class WorkGroup {
         +Long id
@@ -124,6 +129,9 @@ classDiagram
         +boolean active
     }
 
+    WorkGroup "1" -- "*" WorkGroupMember
+    User "1" -- "*" WorkGroupMember
+
     class CapsuleAssignment {
         +Long id
         +WorkGroup workGroup
@@ -136,6 +144,8 @@ classDiagram
         +LocalDateTime createdAt
     }
 
+    WorkGroup "1" -- "*" CapsuleAssignment
+
     class CollaborationSpace {
         +Long id
         +CapsuleAssignment assignment
@@ -143,6 +153,8 @@ classDiagram
         +LocalDateTime createdAt
         +LocalDateTime updatedAt
     }
+
+    CapsuleAssignment "1" -- "1" CollaborationSpace
 
     class Comment {
         +Long id
@@ -157,21 +169,51 @@ classDiagram
         +LocalDateTime updatedAt
     }
 
+    CollaborationSpace "1" -- "*" Comment
+    User "1" -- "*" Comment
+
     class User {
         +Long id
         +String name
         +String email
     }
+```
 
-    Content "1" -- "*" ContentVersion
-    Content "1" -- "*" CapsuleAssignment
-    ContentVersion "1" -- "*" CapsuleAssignment
-    WorkGroup "1" -- "*" WorkGroupMember
-    User "1" -- "*" WorkGroupMember
-    WorkGroup "1" -- "*" CapsuleAssignment
-    CapsuleAssignment "1" -- "1" CollaborationSpace
-    CollaborationSpace "1" -- "*" Comment
-    User "1" -- "*" Comment
+## Content Versioning Flow
+
+The following diagram illustrates the content versioning flow:
+
+```mermaid
+sequenceDiagram
+    participant Author
+    participant ContentService
+    participant ContentVersionRepository
+    participant S3
+
+    Author->>ContentService: saveContent(content, file, author)
+    ContentService->>S3: uploadFile(file)
+    S3-->>ContentService: resourceUrl
+    ContentService->>ContentRepository: save(content)
+    ContentRepository-->>ContentService: savedContent
+    ContentService->>ContentVersionRepository: save(initialVersion)
+    ContentVersionRepository-->>ContentService: initialVersion
+    ContentService-->>Author: savedContent
+
+    Author->>ContentService: createNewVersion(contentId, newContent, author, changeDescription)
+    ContentService->>ContentVersionRepository: setAllVersionsNotCurrent(contentId)
+    ContentService->>ContentVersionRepository: save(newVersion)
+    ContentVersionRepository-->>ContentService: newVersion
+    ContentService-->>Author: newVersion
+
+    Admin->>ContentService: publishVersion(versionId, publisher)
+    ContentService->>ContentVersionRepository: save(version)
+    ContentVersionRepository-->>ContentService: version
+    ContentService-->>Admin: version
+
+    Admin->>ContentService: approveVersion(versionId, approver)
+    ContentService->>ContentVersionRepository: save(version)
+    ContentVersionRepository-->>ContentService: version
+    ContentService-->>Admin: version
 ```
 
 ## Stack Tecnológico
@@ -336,34 +378,3 @@ capsulascba/
 │   │       └── resources/
 │   └── pom.xml
 └── README.md
-```
-
-## Control de Versiones
-
-### Archivos Ignorados (.gitignore)
-
-El proyecto incluye un archivo `.gitignore` configurado para excluir:
-
-- **Dependencias y construcción**:
-  - `node_modules/` y archivos npm
-  - Directorios `build/` y `dist/`
-  - Archivos de Maven `target/`
-
-- **Configuración sensible**:
-  - Archivos `.env` y variables de entorno
-  - Configuraciones de AWS
-  - Propiedades de Spring Boot específicas del entorno
-
-- **Archivos del sistema y IDE**:
-  - Archivos `.DS_Store` (macOS)
-  - Configuraciones de VSCode, IntelliJ IDEA y Eclipse
-  - Archivos de workspace y caché
-
-- **Logs y caché**:
-  - Archivos de registro
-  - Caché de npm y Gradle
-  - Archivos de depuración
-
-## Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT - vea el archivo [LICENSE.md](LICENSE.md) para más detalles.
