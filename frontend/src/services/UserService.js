@@ -49,6 +49,16 @@ const UserService = {
       throw error;
     }
   },
+
+  updateProfile: async (userData) => {
+    try {
+      // Assuming the API endpoint for updating profile is /api/users/profile
+      const response = await axios.put(`${API_BASE_URL}/profile`, userData);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default UserService;

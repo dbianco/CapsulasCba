@@ -195,13 +195,13 @@ const ProfilePage = () => {
                 }}
               />
             </label>
-            <Typography variant="h5" sx={{ mb: 0.5 }}>{`${user?.firstName || ''} ${user?.lastName || ''}`}</Typography>
+            <Typography variant="h5" sx={{ mb: 0.5 }}>{`${user?.data?.firstName || ''} ${user?.data?.lastName || ''}`}</Typography>
             <Typography variant="body2" color="textSecondary" sx={{ mb: 1 }}>
-              @{user?.username || ''}
+              @{user?.data?.username}
             </Typography>
-<Typography variant="body1" color="textSecondary" sx={{ mb: 1 }}>
-  {user?.email ? user?.email : t('profile.noEmail')}
-</Typography>
+            <Typography variant="body1" color="textSecondary" sx={{ mb: 1 }}>
+              {user?.data?.email ? user.data.email : t('profile.noEmail')}
+            </Typography>
             <Typography variant="caption" color="textSecondary">
               {t('profile.clickToChange')}
             </Typography>
@@ -210,7 +210,7 @@ const ProfilePage = () => {
         <Grid item xs={12} md={8}>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <Box sx={{ width: '100%' }}>
                   <Typography
                     variant="subtitle1"
@@ -239,7 +239,7 @@ const ProfilePage = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <Box sx={{ width: '100%' }}>
                   <Typography
                     variant="subtitle1"
@@ -268,7 +268,7 @@ const ProfilePage = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <Box sx={{ width: '100%' }}>
                   <Typography
                     variant="subtitle1"
@@ -298,7 +298,7 @@ const ProfilePage = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <Box sx={{ width: '100%' }}>
                   <Typography
                     variant="subtitle1"

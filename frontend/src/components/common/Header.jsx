@@ -8,8 +8,6 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Menu,
-  MenuItem,
   Button,
   Avatar,
   Tooltip,
@@ -25,6 +23,7 @@ import {
   Notifications,
   Add,
   Language,
+  Logout,
 } from '@mui/icons-material';
 import { styled, alpha } from '@mui/material/styles';
 import { toggleMobileMenu, toggleSearchDrawer } from '../../store/slices/uiSlice';
@@ -80,20 +79,10 @@ const Header = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const { collapsed: sidebarCollapsed } = useSelector((state) => state.ui.sidebar);
-  const [anchorEl, setAnchorEl] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
 
   const handleLogout = () => {
     dispatch(logout());
-    handleMenuClose();
     navigate('/login');
   };
 
@@ -209,10 +198,9 @@ const Header = () => {
               <Tooltip title={t('header.profile')}>
                 <IconButton
                   size="large"
-                  edge="end"
                   aria-label="account of current user"
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
+                  component={RouterLink}
+                  to="/profile"
                   color="inherit"
                 >
                   {user?.profilePictureUrl ? (
@@ -226,30 +214,16 @@ const Header = () => {
                   )}
                 </IconButton>
               </Tooltip>
-              
-              <Menu
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-              >
-                <MenuItem
-                  component={RouterLink}
-                  to="/profile"
-                  onClick={handleMenuClose}
+              <Tooltip title={t('header.logout')}>
+                <IconButton
+                  size="large"
+                  aria-label="logout"
+                  onClick={handleLogout}
+                  color="inherit"
                 >
-                  {t('header.myProfile')}
-                </MenuItem>
-                <MenuItem onClick={handleLogout}>{t('header.logout')}</MenuItem>
-              </Menu>
+                  <Logout />
+                </IconButton>
+              </Tooltip>
             </Box>
           ) : (
             <Box sx={{ display: 'flex' }}>

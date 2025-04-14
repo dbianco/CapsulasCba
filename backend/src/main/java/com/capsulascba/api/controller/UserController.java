@@ -15,8 +15,6 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 @RequestMapping("/api/users")
@@ -33,26 +31,18 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
-        logger.info("Login attempt for username: {}", loginDTO.getUsername());
         try {
-            logger.info("Total users in database: {}", userService.getAllUsers().size());
-            
             User user = userService.getUserByUsername(loginDTO.getUsername());
             logger.info("User found: {}", user != null ? user.toString() : "null");
             
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
             );
-            
             if (authentication.isAuthenticated()) {
-                logger.info("User authenticated successfully: {}", loginDTO.getUsername());
                 return ResponseEntity.ok(user);
             }
-            
-            logger.warn("Authentication failed for user: {}", loginDTO.getUsername());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } catch (Exception e) {
-            logger.error("Exception during authentication for user: {}", loginDTO.getUsername(), e);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }

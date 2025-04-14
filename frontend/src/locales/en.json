@@ -78,7 +78,8 @@
     "password": "Password",
     "usernameHelperText": "Please enter your username",
     "passwordHelperText": "Please enter your password",
-    "loginButton": "Login"
+    "loginButton": "Login",
+    "loginFailed": "Login failed. Please check your credentials."
   },
   "register": {
     "usernameHelperText": "Please enter your username",

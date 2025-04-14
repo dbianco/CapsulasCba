@@ -78,7 +78,8 @@
     "password": "Contraseña",
     "usernameHelperText": "Por favor, ingrese su nombre de usuario",
     "passwordHelperText": "Por favor, ingrese su contraseña",
-    "loginButton": "Iniciar Sesión"
+    "loginButton": "Iniciar Sesión",
+    "loginFailed": "Error al iniciar sesión. Por favor, verifique sus credenciales."
   },
   "register": {
     "usernameHelperText": "Por favor, ingrese su nombre de usuario",
@@ -95,5 +96,15 @@
     "passwordHelperText": "Por favor, ingrese su nueva contraseña",
     "confirmPasswordHelperText": "Por favor, confirme su nueva contraseña",
     "submit": "Restablecer Contraseña"
+  },
+  "profile": {
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo electrónico",
+    "bio": "Biografía",
+    "saveChanges": "Guardar cambios",
+    "noEmail": "Sin correo electrónico",
+    "clickToChange": "Haz clic para cambiar",
+    "userNotFound": "Usuario no encontrado"
   }
 }
