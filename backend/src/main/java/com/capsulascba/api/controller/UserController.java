@@ -1,12 +1,14 @@
 package com.capsulascba.api.controller;
 
+import com.capsulascba.api.dto.LoginDTO;
 import com.capsulascba.api.model.User;
 import com.capsulascba.api.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +21,40 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    
     private final UserService userService;
+    private final AuthenticationManager authenticationManager;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthenticationManager authenticationManager) {
         this.userService = userService;
+        this.authenticationManager = authenticationManager;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
+        logger.info("Login attempt for username: {}", loginDTO.getUsername());
+        try {
+            logger.info("Total users in database: {}", userService.getAllUsers().size());
+            
+            User user = userService.getUserByUsername(loginDTO.getUsername());
+            logger.info("User found: {}", user != null ? user.toString() : "null");
+            
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
+            );
+            
+            if (authentication.isAuthenticated()) {
+                logger.info("User authenticated successfully: {}", loginDTO.getUsername());
+                return ResponseEntity.ok(user);
+            }
+            
+            logger.warn("Authentication failed for user: {}", loginDTO.getUsername());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            logger.error("Exception during authentication for user: {}", loginDTO.getUsername(), e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     @PostMapping

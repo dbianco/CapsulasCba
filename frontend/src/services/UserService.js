@@ -1,11 +1,14 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api/users'; // Assuming the backend is running on the same domain
+const API_BASE_URL = '/api/users';
 
 const UserService = {
   login: async (username, password) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/login`, { username, password });
+      const response = await axios.post(
+        `${API_BASE_URL}/login`,
+        { username, password }
+      );
       return response.data;
     } catch (error) {
       throw error;

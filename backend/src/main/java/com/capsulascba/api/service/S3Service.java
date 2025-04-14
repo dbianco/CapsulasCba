@@ -1,6 +1,7 @@
 package com.capsulascba.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -14,6 +15,7 @@ import java.io.InputStream;
 public class S3Service {
 
     @Autowired
+    @Qualifier("s3Client2")
     private S3Client s3Client;
 
     @Value("${aws.s3.bucket}")

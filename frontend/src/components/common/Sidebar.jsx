@@ -26,6 +26,7 @@ import {
   Help,
   ChevronLeft,
   ChevronRight,
+  CollectionsBookmark,
 } from '@mui/icons-material';
 import { toggleMobileMenu, toggleSidebar } from '../../store/slices/uiSlice';
 
@@ -38,6 +39,7 @@ const getMenuItems = (t) => [
   { text: t('sidebar.menu.groups'), icon: <Group />, path: '/groups' },
   { text: t('sidebar.menu.saved'), icon: <Bookmark />, path: '/saved' },
   { text: t('sidebar.menu.trending'), icon: <TrendingUp />, path: '/trending' },
+  { text: t('sidebar.menu.contentCapsules'), icon: <CollectionsBookmark />, path: '/content' },
 ];
 
 const getBottomMenuItems = (t) => [

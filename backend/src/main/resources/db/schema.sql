@@ -1,6 +1,6 @@
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
     is_active BOOLEAN DEFAULT TRUE,
     is_email_verified BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login_at TIMESTAMP
 );
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS user_expertise (
 
 -- Contents table
 CREATE TABLE IF NOT EXISTS contents (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     content TEXT,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS contents (
     like_count BIGINT DEFAULT 0,
     assignment_count BIGINT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     resource_url VARCHAR(255),
     FOREIGN KEY (author_id) REFERENCES users(id)
 );
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS content_categories (
 
 -- Content versions table
 CREATE TABLE IF NOT EXISTS content_versions (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     content_id BIGINT NOT NULL,
     version_number INT NOT NULL,
     content_data TEXT,
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS content_versions (
 
 -- Content resources table
 CREATE TABLE IF NOT EXISTS content_resources (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     content_id BIGINT NOT NULL,
     resource_type VARCHAR(50),
     resource_url VARCHAR(255),
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS content_resources (
 
 -- Capsule assignments table
 CREATE TABLE IF NOT EXISTS capsule_assignments (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     capsule_id BIGINT NOT NULL,
     version_id BIGINT NOT NULL,
     work_group_id BIGINT NOT NULL,

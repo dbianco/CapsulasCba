@@ -19,6 +19,7 @@ import ContentPage from './pages/ContentPage';
 import ContentEditorPage from './pages/ContentEditorPage';
 import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ContentListPage from './pages/ContentListPage';
 
 // Components
 import ProtectedRoute from './components/common/ProtectedRoute';
@@ -54,15 +55,16 @@ const App = () => {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/content" element={<ContentListPage />} />
           <Route path="/content/:id" element={<ContentPage />} />
-          
+
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/content/create" element={<ContentEditorPage />} />
             <Route path="/content/edit/:id" element={<ContentEditorPage />} />
           </Route>
-          
+
           {/* 404 Route */}
           <Route path="*" element={<NotFoundPage />} />
         </Route>

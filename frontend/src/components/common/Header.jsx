@@ -203,6 +203,9 @@ const Header = () => {
                 </IconButton>
               </Tooltip>
               
+              <Typography variant="body1" sx={{ mr: 1 }}>
+                {user?.firstName || user?.username}
+              </Typography>
               <Tooltip title={t('header.profile')}>
                 <IconButton
                   size="large"
