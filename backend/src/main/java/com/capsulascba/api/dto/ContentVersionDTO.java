@@ -6,17 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CollaborationSpaceDTO {
+public class ContentVersionDTO {
 
     private Long id;
-    private String name;
-    private String description;
-    private Long createdByUserId;
+    private Long contentId;
+    private Integer versionNumber;
+    private String changeDescription;
+    private Long authorId;
+    private String authorName;
+    private List<ContentResourceDTO> resources;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }

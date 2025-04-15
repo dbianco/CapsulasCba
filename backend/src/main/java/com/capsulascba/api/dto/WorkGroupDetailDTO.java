@@ -1,22 +1,19 @@
 package com.capsulascba.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.capsulascba.api.model.enums.WorkGroupStatus;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class CollaborationSpaceDTO {
-
+public class WorkGroupDetailDTO {
     private Long id;
     private String name;
     private String description;
-    private Long createdByUserId;
+    private WorkGroupStatus status;
+    private List<WorkGroupMemberDTO> members;
+    private List<CapsuleAssignmentDTO> assignments;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

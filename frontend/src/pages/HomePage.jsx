@@ -52,6 +52,15 @@ const HomePage = () => {
           >
             {t('home.exploreContent')}
           </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            onClick={() => navigate('/workgroups')}
+            aria-label={t('workgroups.title')}
+          >
+            {t('workgroups.title')}
+          </Button>
           {isAuthenticated && (
             <Button
               variant="outlined"

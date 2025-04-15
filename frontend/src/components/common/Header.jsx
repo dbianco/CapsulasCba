@@ -29,6 +29,10 @@ import { styled, alpha } from '@mui/material/styles';
 import { toggleMobileMenu, toggleSearchDrawer } from '../../store/slices/uiSlice';
 import { logout } from '../../store/slices/authSlice';
 
+const HeaderLinks = [
+  { path: '/', label: 'common.appName' }
+];
+
 const drawerWidth = 240;
 const collapsedDrawerWidth = 64;
 
@@ -140,7 +144,19 @@ const Header = () => {
           >
             {t('common.appName')}
           </Typography>
-
+           <Box sx={{ display: 'flex' }}>
+            {HeaderLinks.map((link) => (
+              <Button
+                key={link.path}
+                component={RouterLink}
+                to={link.path}
+                color="inherit"
+                sx={{ mr: 1 }}
+              >
+                {t(link.label)}
+              </Button>
+            ))}
+          </Box>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

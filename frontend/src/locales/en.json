@@ -96,5 +96,20 @@
     "passwordHelperText": "Please enter your new password",
     "confirmPasswordHelperText": "Please confirm your new password",
     "submit": "Reset Password"
+  },
+  "workgroups": {
+    "title": "Work Groups",
+    "addNew": "Add New Workgroup",
+    "viewEdit": "View/Edit",
+    "name": "Name",
+    "description": "Description",
+    "create": "Create",
+    "cancel": "Cancel",
+    "saveChanges": "Save Changes",
+    "editName": "Edit Name", 
+    "editDescription": "Edit Description",
+    "editTitle": "Edit Workgroup",
+    "nameLabel": "Name",
+    "descriptionLabel": "Description"
   }
 }

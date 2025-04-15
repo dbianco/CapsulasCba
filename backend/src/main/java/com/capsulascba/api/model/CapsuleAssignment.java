@@ -37,6 +37,14 @@ public class CapsuleAssignment {
     @JoinColumn(name = "content_version_id", nullable = false)
     private ContentVersion version;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assigned_by", nullable = false)
+    private User assignedBy;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assigned_to", nullable = false)
+    private User assignedTo;
+
     @Column(name = "start_date", nullable = false)
     private LocalDateTime startDate;
 

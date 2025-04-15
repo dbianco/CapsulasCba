@@ -5,18 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CollaborationSpaceDTO {
+public class ContentResourceDTO {
 
     private Long id;
     private String name;
-    private String description;
-    private Long createdByUserId;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private String url;
+    private String type;
+    private Long size;
+    private String mimeType;
+    private Long contentId;
+    private Long versionId;
 }

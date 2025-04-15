@@ -5,13 +5,15 @@ import com.capsulascba.api.model.enums.WorkGroupStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -19,7 +21,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "work_groups")
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -110,8 +113,21 @@ public class WorkGroup {
      */
     public boolean isActiveOrganizer(User user) {
         return members.stream()
-                .anyMatch(m -> m.getUser().equals(user) 
-                        && m.isActive() 
+                .anyMatch(m -> m.getUser().equals(user)
+                        && m.isActive()
                         && m.getRole() == WorkGroupRole.ORGANIZER);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkGroup workGroup = (WorkGroup) o;
+        return Objects.equals(id, workGroup.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

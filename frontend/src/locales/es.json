@@ -5,7 +5,8 @@
       "en": "Inglés",
       "es": "Español",
       "toggle": "Cambiar idioma"
-    }
+    },
+    "cancel": "Cancelar"
   },
   "sidebar": {
     "menu": {
@@ -106,5 +107,20 @@
     "noEmail": "Sin correo electrónico",
     "clickToChange": "Haz clic para cambiar",
     "userNotFound": "Usuario no encontrado"
+  },
+  "workgroups": {
+    "title": "Grupos de Trabajo",
+    "addNew": "Agregar Nuevo Grupo de Trabajo",
+    "viewEdit": "Ver/Editar",
+    "name": "Nombre",
+    "description": "Descripción",
+    "create": "Crear",
+    "cancel": "Cancelar",
+    "saveChanges": "Guardar Cambios",
+    "editName": "Editar Nombre",
+    "editDescription": "Editar Descripción",
+    "editTitle": "Editar Grupo de Trabajo",
+    "nameLabel": "Nombre",
+    "descriptionLabel": "Descripción"
   }
 }

@@ -36,7 +36,7 @@ const collapsedDrawerWidth = 64;
 const getMenuItems = (t) => [
   { text: t('sidebar.menu.home'), icon: <Home />, path: '/' },
   { text: t('sidebar.menu.explore'), icon: <School />, path: '/explore' },
-  { text: t('sidebar.menu.groups'), icon: <Group />, path: '/groups' },
+  { text: t('sidebar.menu.groups'), icon: <Group />, path: '/workgroups' },
   { text: t('sidebar.menu.saved'), icon: <Bookmark />, path: '/saved' },
   { text: t('sidebar.menu.trending'), icon: <TrendingUp />, path: '/trending' },
   { text: t('sidebar.menu.contentCapsules'), icon: <CollectionsBookmark />, path: '/content' },

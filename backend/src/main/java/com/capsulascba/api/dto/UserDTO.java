@@ -1,23 +1,28 @@
 package com.capsulascba.api.dto;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.Email;
+import com.capsulascba.api.model.enums.EducationLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
-    @NotNull(message = "ID is required")
-    private String id;
-    
-    @NotNull(message = "Username is required")
-    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+
+    private Long id;
     private String username;
-    
-    @NotNull(message = "Email cannot be empty")
-    @Email(message = "Invalid email format")
+    private String firstName;
+    private String lastName;
     private String email;
-    
-    @NotNull(message = "Roles are required")
-    private String[] roles;
+    private String profileImageUrl;
+    private String location;
+    private String aboutMe;
+    private EducationLevel educationLevel;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

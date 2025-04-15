@@ -1,32 +1,30 @@
 package com.capsulascba.api.dto;
 
-import jakarta.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Date;
+import com.capsulascba.api.model.enums.ContentType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ContentDTO {
-    @NotNull(message = "ID is required")
-    private String id;
-    
-    @NotNull(message = "Title is required")
+
+    private Long id;
     private String title;
-    
-    @NotNull(message = "Content is required")
-    private String content;
-    
-    @NotNull(message = "Author is required")
-    private String author;
-    
-    @NotNull(message = "Creation date cannot be null")
-    private Date creationDate;
-    
-    @NotNull(message = "Status is required")
-    private String status;
-    
-    @NotNull(message = "Version number is required")
-    private int versionNumber;
-    
-    private List<CommentDTO> comments;
+    private String description;
+    private ContentType type;
+    private Long authorId;
+    private String authorName;
+    private List<ContentResourceDTO> resources;
+    private List<Long> collaborationSpaceIds;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private Long currentVersionId;
+    private Integer version;
 }

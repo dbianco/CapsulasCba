@@ -1,6 +1,6 @@
 package com.capsulascba.api.controller;
 
-import com.capsulascba.api.dto.WorkGroupDTO;
+import com.capsulascba.api.dto.*;
 import com.capsulascba.api.service.WorkGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,22 +22,57 @@ public class WorkGroupController {
 
     @GetMapping
     public ResponseEntity<List<WorkGroupDTO>> getAllWorkGroups() {
-        return new ResponseEntity<>(workGroupService.getAllWorkGroups(), HttpStatus.OK);
+        List<WorkGroupDTO> workGroups = workGroupService.getAllWorkGroups();
+        return new ResponseEntity<>(workGroups, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WorkGroupDTO> getWorkGroupById(@PathVariable Long id) {
-        return new ResponseEntity<>(workGroupService.getWorkGroupById(id), HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<WorkGroupDTO> createWorkGroup(@RequestBody WorkGroupDTO workGroupDTO) {
-        return new ResponseEntity<>(workGroupService.createWorkGroup(workGroupDTO, 1L), HttpStatus.CREATED);
+    public ResponseEntity<WorkGroupDetailDTO> getWorkGroup(@PathVariable Long id) {
+        WorkGroupDetailDTO workGroup = workGroupService.getWorkGroupDetails(id);
+        return new ResponseEntity<>(workGroup, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WorkGroupDTO> updateWorkGroup(@PathVariable Long id, @RequestBody WorkGroupDTO workGroupDTO) {
-        return new ResponseEntity<>(workGroupService.updateWorkGroup(id, workGroupDTO), HttpStatus.OK);
+    public ResponseEntity<WorkGroupDetailDTO> updateWorkGroup(
+            @PathVariable Long id,
+            @RequestBody UpdateWorkGroupRequest request
+    ) {
+        WorkGroupDetailDTO updatedWorkGroup = workGroupService.updateWorkGroup(id, request);
+        return new ResponseEntity<>(updatedWorkGroup, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/members")
+    public ResponseEntity<List<WorkGroupMemberDTO>> getMembers(@PathVariable Long id) {
+        List<WorkGroupMemberDTO> members = workGroupService.getMembers(id);
+        return new ResponseEntity<>(members, HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/members")
+    public ResponseEntity<WorkGroupMemberDTO> addMember(
+            @PathVariable Long id,
+            @RequestBody AddMemberRequest request
+    ) {
+        WorkGroupMemberDTO newMember = workGroupService.addMember(id, request);
+        return new ResponseEntity<>(newMember, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}/members/{memberId}")
+    public ResponseEntity<WorkGroupMemberDTO> updateMember(
+            @PathVariable Long id,
+            @PathVariable Long memberId,
+            @RequestBody UpdateMemberRequest request
+    ) {
+        WorkGroupMemberDTO updatedMember = workGroupService.updateMember(id, memberId, request);
+        return new ResponseEntity<>(updatedMember, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}/members/{memberId}")
+    public ResponseEntity<Void> removeMember(
+            @PathVariable Long id,
+            @PathVariable Long memberId
+    ) {
+        workGroupService.removeMember(id, memberId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")

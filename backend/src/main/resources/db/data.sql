@@ -7,3 +7,7 @@ INSERT INTO user_roles (user_id, role)
 SELECT id, 'ROLE_ADMIN'
 FROM users
 WHERE username = 'admin';
+
+-- Insert a mock workgroup
+INSERT INTO work_groups (name, description, status, created_at)
+VALUES ('Mock WorkGroup', 'This is a mock workgroup for testing purposes.', 'ACTIVE', CURRENT_TIMESTAMP);
