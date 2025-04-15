@@ -21,6 +21,7 @@ import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ContentListPage from './pages/ContentListPage';
 import WorkGroupsPage from './pages/WorkGroupsPage';
+import WorkGroupEditPage from './pages/WorkGroupEditPage';
 
 // Components
 import ProtectedRoute from './components/common/ProtectedRoute';
@@ -67,6 +68,7 @@ const App = () => {
           </Route>
           
           <Route path="/workgroups" element={<WorkGroupsPage />} />
+          <Route path="/workgroups/:id/edit" element={<WorkGroupEditPage />} />
 
           {/* 404 Route */}
           <Route path="*" element={<NotFoundPage />} />
