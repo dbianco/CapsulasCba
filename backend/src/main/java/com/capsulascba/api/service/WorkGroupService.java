@@ -14,6 +14,8 @@ import com.capsulascba.api.validator.WorkGroupValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -100,7 +102,13 @@ public class WorkGroupService {
         workGroupRepository.save(workGroup);
     }
 
-     public void deleteWorkGroup(Long id) {
+    public WorkGroupDTO createWorkGroup(WorkGroupDTO workGroupDTO) {
+        WorkGroup workGroup = workGroupMapper.toEntity(workGroupDTO);
+        WorkGroup savedWorkGroup = workGroupRepository.save(workGroup);
+        return workGroupMapper.toDTO(savedWorkGroup);
+    }
+
+    public void deleteWorkGroup(Long id) {
         WorkGroup workGroup = workGroupRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Work group not found"));
 

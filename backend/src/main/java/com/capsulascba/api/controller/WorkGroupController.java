@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/workgroups")
+@RequestMapping(value = "/api/workgroups", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WorkGroupController {
 
     private final WorkGroupService workGroupService;
@@ -73,6 +74,12 @@ public class WorkGroupController {
     ) {
         workGroupService.removeMember(id, memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WorkGroupDTO> createWorkGroup(@RequestBody WorkGroupDTO workGroupDTO) {
+        WorkGroupDTO createdWorkGroup = workGroupService.createWorkGroup(workGroupDTO);
+        return new ResponseEntity<>(createdWorkGroup, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
