@@ -21,7 +21,7 @@ import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ContentListPage from './pages/ContentListPage';
 import WorkGroupsPage from './pages/WorkGroupsPage';
-import WorkGroupEditPage from './pages/WorkGroupEditPage';
+import WorkGroupEditPage from './pages/WorkGroupEditPage.tsx';
 
 // Components
 import ProtectedRoute from './components/common/ProtectedRoute';
